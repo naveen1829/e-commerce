@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import AddIcon from "@mui/icons-material/Add";
 
 const Title = styled.div`
   text-overflow: ellipsis;
@@ -66,7 +67,11 @@ const ProductCard = (props) => {
           <Typography variant="h5">₹{price}</Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={handleAddToCart}>
+          <Button
+            size="small"
+            onClick={handleAddToCart}
+            startIcon={<AddIcon />}
+          >
             Add to cart
           </Button>
         </CardActions>
