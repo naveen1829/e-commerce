@@ -6,6 +6,7 @@ import Electronics from "./components/Electronics/Electronics";
 import Jewelery from "./components/Jewelery/Jewelery";
 import MensClothing from "./components/MensClothing/MensClothing";
 import WomensClothing from "./components/WomensClothing/WomensClothing";
+import ProductDetail from "./components/Detail/ProductDetail";
 import MenuBar from "./components/MenuBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -24,6 +25,7 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<AllProducts products={products} />} />
         <Route path="products" element={<AllProducts products={products} />} />
+        <Route path="/products/productDetail/:id" element={<ProductDetail />} />
         <Route path="electronics" element={<Electronics />} />
         <Route path="jewelery" element={<Jewelery />} />
         <Route path="men's%20clothing" element={<MensClothing />} />

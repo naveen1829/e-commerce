@@ -9,6 +9,7 @@ import Toolbar from "@mui/material/Toolbar";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Categories from "./Categories/Categories";
 import { Link } from "react-router-dom";
+import logo from "../assets/e-commerce.png";
 
 const MenuBar = () => {
   const [open, setOpen] = React.useState(false);
@@ -19,12 +20,12 @@ const MenuBar = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = (value) => {
+  const handleClose = () => {
     setOpen(false);
   };
   return (
     <>
-      <AppBar position="static" sx={{ marginBottom: 8 }}>
+      <AppBar position="static">
         <Toolbar>
           <IconButton
             size="large"
@@ -41,12 +42,23 @@ const MenuBar = () => {
             component={Link}
             to="/"
             variant="h6"
-            sx={{ flexGrow: 1, textDecoration: "none" }}
+            sx={{ display: "flex", flexGrow: 1, textDecoration: "none" }}
             color="inherit"
           >
+            <img
+              src={logo}
+              alt="ecommerce"
+              height="32px"
+              style={{ marginRight: "8px" }}
+            />
             The Shopping Store
           </Typography>
-          <IconButton to="/cart" aria-label="Show cart items" color="inherit">
+          <IconButton
+            component={Link}
+            to="/cart"
+            aria-label="Show cart items"
+            color="inherit"
+          >
             <Badge color="secondary">
               <ShoppingCart />
             </Badge>

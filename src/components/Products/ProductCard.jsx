@@ -1,10 +1,13 @@
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Button,
+  Typography,
+} from "@mui/material";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Title = styled.div`
   text-overflow: ellipsis;
@@ -17,7 +20,24 @@ const Title = styled.div`
 `;
 
 const ProductCard = (props) => {
-  const { image, title, price } = props;
+  const { id, image, title, price } = props;
+  const navigate = useNavigate();
+
+  const handleAddToCart = async (event) => {
+    event.stopPropagation();
+    fetch("https://fakestoreapi.com/carts", {
+      method: "POST",
+      body: JSON.stringify({
+        userId: 5,
+        date: new Date().getTime(),
+        products: [{ productId: id, quantity: 1 }],
+      }),
+    });
+  };
+
+  const navigateToDetail = () => {
+    navigate("/products/productDetail/" + id);
+  };
 
   return (
     <>
@@ -28,7 +48,9 @@ const ProductCard = (props) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
+          cursor: "pointer",
         }}
+        onClick={navigateToDetail}
       >
         <CardMedia
           component="img"
@@ -44,7 +66,9 @@ const ProductCard = (props) => {
           <Typography variant="h5">₹{price}</Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Add to cart</Button>
+          <Button size="small" onClick={handleAddToCart}>
+            Add to cart
+          </Button>
         </CardActions>
       </Card>
     </>
