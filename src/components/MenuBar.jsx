@@ -1,5 +1,6 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
+import { useDispatch } from "react-redux";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
@@ -10,8 +11,10 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import Categories from "./Categories/Categories";
 import { Link } from "react-router-dom";
 import logo from "../assets/e-commerce.png";
+import { clearCart } from "../context/cart";
 
-const MenuBar = () => {
+const MenuBar = ({ cartTotal }) => {
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -22,6 +25,10 @@ const MenuBar = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
   };
   return (
     <>
@@ -59,7 +66,7 @@ const MenuBar = () => {
             aria-label="Show cart items"
             color="inherit"
           >
-            <Badge color="secondary">
+            <Badge badgeContent={cartTotal} color="error">
               <ShoppingCart />
             </Badge>
           </IconButton>
@@ -69,6 +76,7 @@ const MenuBar = () => {
             aria-controls="menu-appbar"
             aria-haspopup="true"
             color="inherit"
+            onClick={handleClearCart}
           >
             <AccountCircle />
           </IconButton>
