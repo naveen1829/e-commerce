@@ -3,7 +3,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 
-const AllCategories = (props) => {
+const Categories = (props) => {
   const { onClose, selectedValue, open, anchorEl } = props;
 
   const [categories, setCategories] = useState([]);
@@ -30,7 +30,7 @@ const AllCategories = (props) => {
       open={open}
       onClose={handleClose}
       anchorOrigin={{
-        vertical: "top",
+        vertical: "bottom",
         horizontal: "left",
       }}
       transformOrigin={{
@@ -53,4 +53,4 @@ const AllCategories = (props) => {
   );
 };
 
-export default AllCategories;
+export default Categories;

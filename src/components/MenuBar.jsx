@@ -1,6 +1,5 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import { useDispatch } from "react-redux";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
@@ -11,25 +10,32 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import Categories from "./Categories/Categories";
 import { Link } from "react-router-dom";
 import logo from "../assets/e-commerce.png";
-import { clearCart } from "../context/cart";
+import MyPage from "../components/MyPage/MyPage";
 
 const MenuBar = ({ cartTotal }) => {
-  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
+  const [openMyPageMenu, setOpenMyPageMenu] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [myPageAnchorEl, setMyPageAnchorEl] = React.useState(null);
 
   const handleClickOpen = (event) => {
     setOpen(true);
     setAnchorEl(event.currentTarget);
   };
 
+  const handleMyPageClickOpen = (event) => {
+    setOpenMyPageMenu(true);
+    setMyPageAnchorEl(event.currentTarget);
+  };
+
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleClearCart = () => {
-    dispatch(clearCart());
+  const handleMyPageClose = () => {
+    setOpenMyPageMenu(false);
   };
+
   return (
     <>
       <AppBar position="static">
@@ -76,13 +82,18 @@ const MenuBar = ({ cartTotal }) => {
             aria-controls="menu-appbar"
             aria-haspopup="true"
             color="inherit"
-            onClick={handleClearCart}
+            onClick={handleMyPageClickOpen}
           >
             <AccountCircle />
           </IconButton>
         </Toolbar>
       </AppBar>
       <Categories open={open} anchorEl={anchorEl} onClose={handleClose} />
+      <MyPage
+        open={openMyPageMenu}
+        myPageAnchorEl={myPageAnchorEl}
+        onClose={handleMyPageClose}
+      />
     </>
   );
 };
